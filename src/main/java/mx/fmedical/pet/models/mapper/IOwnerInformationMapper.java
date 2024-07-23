@@ -9,11 +9,11 @@ import org.mapstruct.Mappings;
 @Mapper(componentModel = "spring")
 
 public interface IOwnerInformationMapper {
-    /*  @Mappings({
+      @Mappings({
             @Mapping(target = "fullName", source = "fullName"),
             @Mapping(target = "address", source = "address"),
             @Mapping(target = "phone", source = "phone"),
             @Mapping(target = "age", source = "age")
-    })*/
+    })
     OwnerInformation addOwnerInformation(OwnerInformationDTO ownerInformationDTO);
 }

@@ -10,11 +10,11 @@ import org.mapstruct.Mappings;
 
 public interface IVetAssigmentMapper {
 
-    /* @Mappings({
+     @Mappings({
             @Mapping(target = "name", source = "name"),
             @Mapping(target = "lastName", source = "lastName"),
             @Mapping(target = "professionalLicense", source = "professionalLicense")
 
-    })*/
+    })
     VetAssigment vetAssigmentAdd(VetAssigmentDTO venetAssigmentDTO);
 }

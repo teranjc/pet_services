@@ -9,7 +9,7 @@ import org.mapstruct.Mappings;
 @Mapper(componentModel = "spring")
 
 public interface IPetMapper {
-/*    @Mappings({
+    @Mappings({
             @Mapping(target = "name", source = "name"),
             @Mapping(target = "species", source = "species"),
             @Mapping(target = "breed", source = "breed"),
@@ -19,7 +19,7 @@ public interface IPetMapper {
             @Mapping(target = "color", source = "color"),
             @Mapping(target = "currentVaccination", source = "currentVaccination")
 
-    })*/
+    })
     Pet toPet(PetDTO petDTO);
 
     PetDTO toPetDTO(Pet pet);
