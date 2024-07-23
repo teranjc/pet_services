@@ -1,27 +1,30 @@
-# Usa una imagen base de Maven para construir el proyecto
-FROM maven:3.9.5-openjdk-17 AS build
+# Etapa 1: Construcción
+FROM maven:3.9.5 AS build
 
-# Establece el directorio de trabajo
+# Instala OpenJDK 17
+RUN apt-get update && apt-get install -y openjdk-17-jdk
+
+# Configura el directorio de trabajo
 WORKDIR /app
 
-# Copia el archivo pom.xml y el directorio src al contenedor
+# Copia el archivo pom.xml y el directorio src
 COPY pom.xml .
 COPY src ./src
 
-# Construye el proyecto
+# Descarga las dependencias y construye la aplicación
 RUN mvn clean package -DskipTests
 
-# Usa una imagen base de OpenJDK para ejecutar el archivo WAR
+# Etapa 2: Ejecución
 FROM openjdk:17-jdk-slim
 
-# Establece el directorio de trabajo
+# Configura el directorio de trabajo
 WORKDIR /app
 
-# Copia el archivo WAR del contenedor de construcción
-COPY --from=build /app/target/pet.war /app/pet.war
+# Copia el archivo WAR desde la etapa de construcción
+COPY --from=build /app/target/pet-0.0.1-SNAPSHOT.war ./app.war
 
-# Expone el puerto en el que la aplicación escucha
+# Expone el puerto en el que se ejecutará la aplicación
 EXPOSE 8080
 
-# Comando para ejecutar el archivo WAR
-ENTRYPOINT ["java", "-jar", "/app/pet.war"]
+# Comando para ejecutar la aplicación
+ENTRYPOINT ["java", "-jar", "/app/app.war"]
