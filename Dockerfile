@@ -1,24 +1,14 @@
-FROM ubuntu:latest AS build
+# Etapa 1: Construcción
+FROM maven:3.9.2-openjdk-17 AS build
 
-# Install necessary packages
-RUN apt-get update && \
-    apt-get install -y openjdk-17-jdk maven
-
-# Copy the Maven configuration and application source code
-COPY pom.xml /app/pom.xml
-COPY src /app/src
-
-# Set the working directory
 WORKDIR /app
+COPY pom.xml .
+COPY src ./src
+RUN mvn clean package -DskipTests
 
-# Use a smaller base image for the final stage
+# Etapa 2: Ejecución
 FROM openjdk:17-jdk-slim
-
-# Expose the application port
-EXPOSE 8080
-
-# Copia el archivo WAR desde la etapa de construcción
+WORKDIR /app
 COPY --from=build /app/target/pet-0.0.1-SNAPSHOT.war ./app.war
-
-# Comando para ejecutar la aplicación
+EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "/app/app.war"]
