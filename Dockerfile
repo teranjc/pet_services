@@ -1,5 +1,5 @@
 # Etapa 1: Construcción
-FROM maven:3.9.5-jdk-17 AS build
+FROM maven:3.9.5-openjdk-17 AS build
 
 # Configura el directorio de trabajo
 WORKDIR /app
