@@ -6,7 +6,9 @@ import mx.fmedical.pet.models.entities.Pet;
 import org.springframework.stereotype.Component;
 
 @Generated(
-    value = "org.mapstruct.ap.MappingProcessor"
+    value = "org.mapstruct.ap.MappingProcessor",
+    date = "2024-07-23T17:12:02-0600",
+    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.11 (Amazon.com Inc.)"
 )
 @Component
 public class IPetMapperImpl implements IPetMapper {
@@ -19,6 +21,7 @@ public class IPetMapperImpl implements IPetMapper {
 
         Pet pet = new Pet();
 
+        pet.setIdPet( petDTO.getIdPet() );
         pet.setName( petDTO.getName() );
         pet.setSpecies( petDTO.getSpecies() );
         pet.setBreed( petDTO.getBreed() );
@@ -27,7 +30,6 @@ public class IPetMapperImpl implements IPetMapper {
         pet.setSex( petDTO.getSex() );
         pet.setColor( petDTO.getColor() );
         pet.setCurrentVaccination( petDTO.getCurrentVaccination() );
-        pet.setIdPet( petDTO.getIdPet() );
 
         return pet;
     }

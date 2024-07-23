@@ -6,7 +6,9 @@ import mx.fmedical.pet.models.entities.VetAssigment;
 import org.springframework.stereotype.Component;
 
 @Generated(
-    value = "org.mapstruct.ap.MappingProcessor"
+    value = "org.mapstruct.ap.MappingProcessor",
+    date = "2024-07-23T17:12:02-0600",
+    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.11 (Amazon.com Inc.)"
 )
 @Component
 public class IVetAssigmentMapperImpl implements IVetAssigmentMapper {

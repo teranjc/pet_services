@@ -68,7 +68,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>mx.fmedical.pet.PetApplication</mainClass> <!-- Reemplaza con la clase principal de tu aplicación -->
+                    <mainClass>mx.fmedical.pet.PetApplication</mainClass>
                 </configuration>
             </plugin>
             <plugin>

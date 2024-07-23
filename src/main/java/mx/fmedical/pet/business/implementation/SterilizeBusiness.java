@@ -105,6 +105,8 @@ public class SterilizeBusiness implements ISterilizeBusiness {
 
         SterilizeDTO sterilizeDTO = iSterilizeRepository.findByIdSterilize(idSteriliaze);
 
+        VetAssigmentDTO vetAssigmentDTO = iVetAssigmentRepository.findVetAssigngByIdSterilize(idSteriliaze);
+
         List<TreatmentDTO> treatments = iTreatmentRepository.findTreatmentsBySterilizeId(idSteriliaze);
         SterilizeReportDTO sterilizeReportDTO = new SterilizeReportDTO();
         // Obtener los tratamientos asociados al reporte de esterilización
@@ -113,6 +115,7 @@ public class SterilizeBusiness implements ISterilizeBusiness {
         sterilizeReportDTO.setOwnerInformationDTO(ownerInformationDTO);
         sterilizeReportDTO.setPetDTO(petDTO);
         sterilizeReportDTO.setSterilizeDTO(sterilizeDTO);
+        sterilizeReportDTO.setDoctorAssigment(vetAssigmentDTO);
         sterilizeReportDTO.setTreatments(treatments);
 
         return sterilizeReportDTO;

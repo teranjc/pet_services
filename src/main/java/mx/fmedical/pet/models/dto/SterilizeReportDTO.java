@@ -14,6 +14,7 @@ public class SterilizeReportDTO {
     OwnerInformationDTO ownerInformationDTO;
     PetDTO petDTO;
     SterilizeDTO sterilizeDTO;
+    VetAssigmentDTO doctorAssigment;
     private List<TreatmentDTO> treatments;
 
 }
