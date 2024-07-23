@@ -1,4 +1,3 @@
-# Use the latest version of Ubuntu
 FROM ubuntu:latest AS build
 
 # Install necessary packages
@@ -18,8 +17,8 @@ FROM openjdk:17-jdk-slim
 # Expose the application port
 EXPOSE 8080
 
-# Copy the JAR file from the build stage
-COPY --from=build /app/target/how-much-pay-api-0.0.1.jar app.jar
+# Copia el archivo WAR desde la etapa de construcción
+COPY --from=build /app/target/pet-0.0.1-SNAPSHOT.war ./app.war
 
-# Specify the command to run the application
-ENTRYPOINT ["java", "-jar", "app.jar"]
+# Comando para ejecutar la aplicación
+ENTRYPOINT ["java", "-jar", "/app/app.war"]
