@@ -8,4 +8,3 @@ public class VetAssigmentDTO {
     private String lastName;
     private String professionalLicense;
 }
-
