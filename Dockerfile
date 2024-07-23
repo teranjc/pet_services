@@ -3,19 +3,17 @@ FROM ubuntu:latest AS build
 
 # Install necessary packages
 RUN apt-get update && \
-    apt-get install -y openjdk-21-jdk
+    apt-get install -y openjdk-21-jdk maven
 
-# Copy the Gradle wrapper and build configuration
-COPY gradlew /app/gradlew
-COPY gradle /app/gradle
-COPY build.gradle /app/build.gradle
-COPY settings.gradle /app/settings.gradle
+# Copy the Maven configuration and application source code
+COPY pom.xml /app/pom.xml
+COPY src /app/src
 
 # Set the working directory
 WORKDIR /app
 
 # Build the application
-RUN ./gradlew bootJar --no-daemon
+RUN mvn clean package -DskipTests
 
 # Use a smaller base image for the final stage
 FROM openjdk:21-jdk-slim
@@ -24,7 +22,7 @@ FROM openjdk:21-jdk-slim
 EXPOSE 8080
 
 # Copy the JAR file from the build stage
-COPY --from=build /app/build/libs/how-much-pay-api-0.0.1.jar app.jar
+COPY --from=build /app/target/how-much-pay-api-0.0.1.jar app.jar
 
 # Specify the command to run the application
 ENTRYPOINT ["java", "-jar", "app.jar"]
