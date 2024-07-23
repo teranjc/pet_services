@@ -1,30 +1,25 @@
-# Etapa 1: Construcción
-FROM maven:3.9.5 AS build
+# Use the latest version of Ubuntu
+FROM ubuntu:latest AS build
 
-# Instala OpenJDK 17
-RUN apt-get update && apt-get install -y openjdk-17-jdk
+# Install necessary packages
+RUN apt-get update && \
+    apt-get install -y openjdk-17-jdk maven
 
-# Configura el directorio de trabajo
+# Copy the Maven configuration and application source code
+COPY pom.xml /app/pom.xml
+COPY src /app/src
+
+# Set the working directory
 WORKDIR /app
 
-# Copia el archivo pom.xml y el directorio src
-COPY pom.xml .
-COPY src ./src
+# Use a smaller base image for the final stage
+FROM openjdk:21-jdk-slim
 
-# Descarga las dependencias y construye la aplicación
-RUN mvn clean package -DskipTests
-
-# Etapa 2: Ejecución
-FROM openjdk:17-jdk-slim
-
-# Configura el directorio de trabajo
-WORKDIR /app
-
-# Copia el archivo WAR desde la etapa de construcción
-COPY --from=build /app/target/pet-0.0.1-SNAPSHOT.war ./app.war
-
-# Expone el puerto en el que se ejecutará la aplicación
+# Expose the application port
 EXPOSE 8080
 
-# Comando para ejecutar la aplicación
-ENTRYPOINT ["java", "-jar", "/app/app.war"]
+# Copy the JAR file from the build stage
+COPY --from=build /app/target/how-much-pay-api-0.0.1.jar app.jar
+
+# Specify the command to run the application
+ENTRYPOINT ["java", "-jar", "app.jar"]
