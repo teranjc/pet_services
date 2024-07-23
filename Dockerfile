@@ -1,25 +1,12 @@
-# Use the latest version of Ubuntu
-FROM ubuntu:latest AS build
-
-# Install necessary packages
-RUN apt-get update && \
-    apt-get install -y openjdk-17-jdk maven
-
-# Copy the Maven configuration and application source code
-COPY pom.xml /app/pom.xml
-COPY src /app/src
-
-# Set the working directory
+# Etapa de construcción
+FROM maven:3.8.6-openjdk-17 AS build
 WORKDIR /app
+COPY pom.xml .
+COPY src ./src
+RUN mvn clean package -DskipTests
 
-# Use a smaller base image for the final stage
+# Etapa de ejecución
 FROM openjdk:17-jdk-slim
-
-# Expose the application port
-EXPOSE 8080
-
-# Copy the JAR file from the build stage
-COPY --from=build /app/target/how-much-pay-api-0.0.1.jar app.jar
-
-# Specify the command to run the application
+WORKDIR /app
+COPY --from=build /app/target/pet-0.0.1-SNAPSHOT.jar app.jar
 ENTRYPOINT ["java", "-jar", "app.jar"]
