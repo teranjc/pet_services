@@ -12,6 +12,3 @@ COPY src ./src
 
 # Descarga las dependencias y construye la aplicación
 RUN mvn clean package -DskipTests
-
-# Lista el contenido del directorio /app/target
-RUN ls -l /app/target
