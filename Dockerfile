@@ -1,5 +1,5 @@
 # Etapa 1: Construcción
-FROM maven:3.9.5-openjdk-17 AS build
+FROM openjdk:17-jdk-slim AS build
 
 WORKDIR /app
 COPY pom.xml .
