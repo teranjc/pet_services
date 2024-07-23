@@ -1,5 +1,8 @@
 # Etapa 1: Construcción
-FROM maven:3.9.5-openjdk-17 AS build
+FROM maven:3.9.5 AS build
+
+# Instala OpenJDK 17
+RUN apt-get update && apt-get install -y openjdk-17-jdk
 
 # Configura el directorio de trabajo
 WORKDIR /app
