@@ -20,7 +20,7 @@
     <description>pet information</description>
 
     <properties>
-        <java.version>21</java.version> <!-- Cambiado a Java 21 si estás usando esta versión -->
+        <java.version>17</java.version> <!-- Cambiado a Java 21 si estás usando esta versión -->
         <lombok.version>1.18.32</lombok.version>
         <org.mapstruct.version>1.5.5.Final</org.mapstruct.version>
         <org.postgresql.version>42.6.2</org.postgresql.version>
